@@ -1,4 +1,5 @@
 [![Donate](https://img.shields.io/badge/-%E2%99%A5%20Donate-%23ff69b4)](https://hmlendea.go.ro/funding)
+[![Build Status](https://github.com/hmlendea/auto-call-responder/actions/workflows/android.yml/badge.svg)](https://github.com/hmlendea/auto-call-responder/actions/workflows/android.yml)
 [![License](https://img.shields.io/github/license/hmlendea/auto-call-responder)](https://github.com/hmlendea/auto-call-responder/blob/master/LICENSE)
 
 # Auto Call Responder
@@ -26,6 +27,8 @@ An Android application that answers incoming calls automatically after a configu
   - [Run](#run)
   - [Linting](#linting)
   - [Test](#test)
+  - [Continuous Integration](#continuous-integration)
+- [GitHub Actions](#️-github-actions)
 - [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
 - [Support](#-support)
@@ -195,6 +198,22 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 ```bash
 ./gradlew test
 ```
+
+The unit tests are located in `app/src/test`.
+
+### Continuous Integration
+
+The `Android` workflow builds the debug APK and runs the unit tests on every push and pull request targeting `master`. Reproduce it locally with:
+
+```bash
+./gradlew assembleDebug test
+```
+
+## ⚙️ GitHub Actions
+
+| Workflow | Purpose | What it does |
+|----------|---------|--------------|
+| [ Android ](https://github.com/hmlendea/auto-call-responder/blob/master/.github/workflows/android.yml) | Build and test | Checks out the repository, sets up JDK 17 and Gradle, builds the debug APK with `./gradlew assembleDebug`, and runs the unit tests with `./gradlew test`. |
 
 ## 🩺 Troubleshooting
 
