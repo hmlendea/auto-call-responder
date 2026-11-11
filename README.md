@@ -1,3 +1,4 @@
+[![Donate](https://img.shields.io/badge/-%E2%99%A5%20Donate-%23ff69b4)](https://hmlendea.go.ro/funding)
 [![License](https://img.shields.io/github/license/hmlendea/auto-call-responder)](https://github.com/hmlendea/auto-call-responder/blob/master/LICENSE)
 
 # Auto Call Responder
@@ -224,9 +225,11 @@ General support inquiries and defect reports are handled through the [issue trac
 
 ## 💝 Project Engagement
 
-Discovered a problem or have a suggestion? [Open an issue](https://github.com/hmlendea/auto-call-responder/issues)!
+Discovered a problem with Auto Call Responder or have a suggestion for it? [Open an issue](https://github.com/hmlendea/auto-call-responder/issues)!
 
-If you find this project useful, consider starring ⭐️ it on GitHub!
+If you find this project useful, consider [funding it](https://hmlendea.go.ro/funding) or starring ⭐️ it on GitHub!
+
+[![Donate](https://raw.githubusercontent.com/hmlendea/readme-assets/master/donate_generic.png)](https://hmlendea.go.ro/funding)
 
 ## 📄 License
 
