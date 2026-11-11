@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".SettingsActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="100dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/settings_title"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- Delay Setting -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Delay before answering (seconds)"
+                android:textSize="16sp" />
+
+            <SeekBar
+                android:id="@+id/seekBarDelay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="60"
+                android:progress="3" />
+
+            <TextView
+                android:id="@+id/tvDelayValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="3 seconds"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/etDelay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Delay in seconds (1-60)"
+                android:inputType="number"
+                android:visibility="gone" />
+
+            <!-- Delay after answering before the audio starts -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Delay after answering before audio (seconds)"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etInternalDelay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Internal delay in seconds (0-60)"
+                android:inputType="number"
+                android:maxLength="2" />
+
+            <!-- Audio output -->
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swEarpiece"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Play audio through earpiece only (not speaker)" />
+
+            <!-- Email Setting -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="Email for notifications"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email address"
+                android:inputType="textEmailAddress" />
+
+            <!-- SMTP Settings -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="SMTP Settings (optional - for direct email sending)"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etSmtpHost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="SMTP Host (e.g., smtp.gmail.com)"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/etSmtpPort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="SMTP Port (e.g., 587)"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/etSmtpUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="SMTP Username"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/etSmtpPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="SMTP Password"
+                android:inputType="textPassword" />
+
+            <!-- Audio File -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="Audio file to play during call"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvAudioFile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="No audio file selected"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btnSelectAudio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Select Audio File" />
+
+            <Button
+                android:id="@+id/btnClearAudio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Clear Audio File" />
+
+            <!-- Filter Romanian Numbers -->
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swFilterRomanian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Filter Romanian numbers only (+40, 0040, 07)" />
+
+            <!-- System access -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="System access"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvRootStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Root: not checked"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btnGrantRoot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Grant Root Access" />
+
+            <Button
+                android:id="@+id/btnBatteryExemption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Disable Battery Optimization" />
+
+            <!-- Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="Cancel" />
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="Save" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
