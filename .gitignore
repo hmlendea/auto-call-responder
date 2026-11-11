@@ -38,6 +38,7 @@ output-metadata.json
 *.p12
 *.pfx
 *.pem
+keystore.properties
 *.key
 release/
 keystore.properties
