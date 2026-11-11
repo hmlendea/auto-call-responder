@@ -173,11 +173,21 @@ sdk.dir=/path/to/Android/Sdk
 
 ### Build
 
+Debug APK:
+
 ```bash
 ./gradlew assembleDebug
 ```
 
 The APK is written to `app/build/outputs/apk/debug/app-debug.apk`.
+
+Unsigned release APK:
+
+```bash
+./gradlew clean assembleRelease
+```
+
+The unsigned APK is written to `app/build/outputs/apk/release/app-release-unsigned.apk` and must be signed before installation or distribution.
 
 ### Run
 
