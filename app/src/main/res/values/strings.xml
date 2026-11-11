@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Auto Call Responder</string>
+    <string name="settings_title">Settings</string>
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+    <string name="delay_seconds">Delay (seconds)</string>
+    <string name="email_address">Email Address</string>
+    <string name="smtp_host">SMTP Host</string>
+    <string name="smtp_port">SMTP Port</string>
+    <string name="smtp_user">SMTP Username</string>
+    <string name="smtp_password">SMTP Password</string>
+    <string name="audio_file">Audio File</string>
+    <string name="filter_romanian">Filter Romanian Numbers Only</string>
+    <string name="select_audio_file">Select Audio File</string>
+    <string name="clear_audio_file">Clear Audio File</string>
+    <string name="test_email">Test Email</string>
+    <string name="request_permissions">Request Permissions</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+</resources>
