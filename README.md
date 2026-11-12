@@ -32,6 +32,7 @@ An Android application that answers incoming calls automatically after a configu
 - [Architecture](#️-architecture)
 - [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
+- [Security](#-security)
 - [Support](#-support)
 - [Project Engagement](#-project-engagement)
 - [License](#-license)
@@ -259,6 +260,12 @@ When doing so, please:
 - Raise a new [issue](https://github.com/hmlendea/auto-call-responder/issues) for problems or suggestions
 
 See the [Contributing Guidelines](./CONTRIBUTING.md) for details on how to report issues, suggest enhancements, and submit changes.
+
+## 🔒 Security
+
+Auto Call Responder answers selected incoming calls, plays a local audio file during the handled call, and sends a notification e-mail, and it transmits data only to the SMTP server configured by the user.
+
+For information on reporting security vulnerabilities, see the [Security Policy](./SECURITY.md).
 
 ## 💬 Support
 
