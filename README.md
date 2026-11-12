@@ -143,6 +143,8 @@ The subsequent settings are recognised:
 
 Auto Call Responder processes call metadata and the e-mail account details entered by the user, and it stores the settings on the device.
 
+For the detailed description of how the application handles privacy and personal data, see the [Privacy Statement](./PRIVACY.md).
+
 | Data | Purpose | Storage | Retention | Optional |
 |------|---------|---------|-----------|----------|
 | Caller number and call timestamps | Composing the call notification e-mail. | Memory only, during the handled call. | Until the call ends. | Yes |
