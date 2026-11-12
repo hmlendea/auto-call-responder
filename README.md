@@ -242,11 +242,14 @@ The `Android` workflow builds the debug APK and runs the unit tests on every pus
 You are welcome to submit any suggestion, feedback, or modification to this project.
 
 When doing so, please:
-- Maintain cross-platform compatibility
 - Submit focused pull requests that conform to the existing code style
 - Maintain your branch synchronised with `master`
 - Revise the documentation when functionality changes
+- Properly test all modifications, including edge cases and error conditions
+- Include tests for additional or modified functionality
 - Raise a new [issue](https://github.com/hmlendea/auto-call-responder/issues) for problems or suggestions
+
+See the [Contributing Guidelines](./CONTRIBUTING.md) for details on how to report issues, suggest enhancements, and submit changes.
 
 ## 💬 Support
 
