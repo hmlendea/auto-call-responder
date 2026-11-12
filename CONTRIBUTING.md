@@ -15,6 +15,7 @@ This document covers the guidelines and processes for contributing to this proje
   - [Code Style](#code-style)
   - [Testing](#testing)
   - [Documentation](#documentation)
+- [Code of Conduct](#-code-of-conduct)
 - [Security](#-security)
 - [License](#-license)
 - [Getting Assistance](#-getting-assistance)
@@ -94,6 +95,10 @@ Follow the project's coding standards:
 - Follow the documentation style guide.
 - Preview changes locally if possible.
 - When updating dependencies (e.g., NuGet packages) or modifying code that affects project structure, update relevant documentation files (README.md, SECURITY.md, ARCHITECTURE.md, docs/, or any other project-specific documentation files) to reflect the changes.
+
+## 📜 Code of Conduct
+
+This project follows the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## 🔒 Security
 
