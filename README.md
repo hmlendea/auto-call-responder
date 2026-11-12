@@ -30,6 +30,7 @@ An Android application that answers incoming calls automatically after a configu
   - [Continuous Integration](#continuous-integration)
 - [GitHub Actions](#️-github-actions)
 - [Architecture](#️-architecture)
+- [Documentation](#-documentation)
 - [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
 - [Code of Conduct](#-code-of-conduct)
@@ -235,6 +236,29 @@ The `Android` workflow builds the debug APK and runs the unit tests on every pus
 Auto Call Responder is a layered, event-driven Android application in which activities, services, and broadcast receivers translate Android callbacks into a small set of helpers that own settings access, Romanian number matching, call audio control, and e-mail notification delivery.
 
 See the [architecture document](./ARCHITECTURE.md) for the system context, principal components, runtime flows, ownership boundaries, dependencies, constraints, and extension points.
+
+## 📚 Documentation
+
+The repository documentation is organised under the [`docs/`](./docs) directory and covers the architecture, components, execution flows, configuration, and operational behaviour of the application.
+
+| Resource | Description |
+|----------|-------------|
+| [Documentation index](./docs/INDEX.md) | Master navigation for every document in the knowledge base. |
+| [Quick start](./docs/quick-start.md) | Getting started guide for newcomers. |
+| [Architecture](./docs/architecture.md) | Deployment topology, boundary ownership, and failure domains that complement the root architecture document. |
+| [Repository structure](./docs/repository-structure.md) | Source-tree layout and layer-to-file mapping. |
+| [Component deep dives](./docs/components/presentation.md) | Per-component analysis of presentation, observation, orchestration, audio, root, storage, and notifications. |
+| [Execution flows](./docs/flows/dialer-call-handling.md) | End-to-end sequences for startup, dialer handling, legacy handling, and notification delivery. |
+| [Behaviour](./docs/behaviour/automatic-call-answering.md) | Answering rules, audio playback and mute, and notification e-mail content. |
+| [Configuration](./docs/configuration.md) | Settings schema, defaults, resolution rules, and secrets. |
+| [Data model and persistence](./docs/data-model.md) | Persistent and in-memory objects and their lifecycle. |
+| [Interface reference](./docs/api-reference/INDEX.md) | Android component contracts implemented by the application. |
+| [Testing](./docs/testing.md) | Test inventory, coverage gaps, and the manual verification checklist. |
+| [Troubleshooting](./docs/troubleshooting.md) | Symptom-to-resolution guidance and log-tag diagnostics. |
+| [Change guide](./docs/change-guide.md) | How to modify common areas safely. |
+| [Invariants](./docs/invariants.md) | System-wide contracts that must remain true. |
+| [Security](./docs/security.md) | Implementation-level threat model and mitigations. |
+| [Logging](./docs/logging.md) | Log tags, levels, and sensitive data. |
 
 ## 🩺 Troubleshooting
 
