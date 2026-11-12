@@ -29,6 +29,7 @@ An Android application that answers incoming calls automatically after a configu
   - [Test](#test)
   - [Continuous Integration](#continuous-integration)
 - [GitHub Actions](#️-github-actions)
+- [Architecture](#️-architecture)
 - [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
 - [Support](#-support)
@@ -224,6 +225,12 @@ The `Android` workflow builds the debug APK and runs the unit tests on every pus
 | Workflow | Purpose | What it does |
 |----------|---------|--------------|
 | [ Android ](https://github.com/hmlendea/auto-call-responder/blob/master/.github/workflows/android.yml) | Build and test | Checks out the repository, sets up JDK 17 and Gradle, builds the debug APK with `./gradlew assembleDebug`, and runs the unit tests with `./gradlew test`. |
+
+## 🏗️ Architecture
+
+Auto Call Responder is a layered, event-driven Android application in which activities, services, and broadcast receivers translate Android callbacks into a small set of helpers that own settings access, Romanian number matching, call audio control, and e-mail notification delivery.
+
+See the [architecture document](./ARCHITECTURE.md) for the system context, principal components, runtime flows, ownership boundaries, dependencies, constraints, and extension points.
 
 ## 🩺 Troubleshooting
 
