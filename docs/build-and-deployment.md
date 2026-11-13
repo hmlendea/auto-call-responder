@@ -54,6 +54,22 @@ flowchart LR
 
 Lint is not part of the workflow. Reproduce the workflow locally with `./gradlew assembleDebug test`.
 
+## Release
+
+`.github/workflows/github-release.yml` runs when a GitHub release is published.
+
+| Step | Action |
+|------|--------|
+| Checkout | `actions/checkout@v7` |
+| JDK | `actions/setup-java@v6`, distribution `temurin`, version `17` |
+| Gradle | `gradle/actions/setup-gradle@v6` |
+| Version | Extracted from the release tag, with a leading `v` stripped |
+| Build | `./gradlew clean assembleRelease --no-daemon` |
+| Rename | `app/build/outputs/apk/release/app-release-unsigned.apk` becomes `AutoCallResponder_v<version>_unsigned.apk` |
+| Publish | Attached to the GitHub release with `softprops/action-gh-release@v2` |
+
+The published APK is unsigned and must be signed before installation or distribution.
+
 ## Deployment
 
 The deployment unit is a single APK installed on a device that can receive calls. There is no server, container, or store pipeline in the repository.

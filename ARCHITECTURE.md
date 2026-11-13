@@ -599,6 +599,7 @@ Manual verification remains material for answering delay accuracy, microphone mu
 | File provider paths | `app/src/main/res/xml/file_paths.xml` |
 | Unit tests | `app/src/test/java/ro/nucilandia/autocallresponder` |
 | Build and test workflow | `.github/workflows/android.yml` |
+| Release workflow | `.github/workflows/github-release.yml` |
 
 ## 📚 Related Documentation
 

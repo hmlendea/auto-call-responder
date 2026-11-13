@@ -230,6 +230,7 @@ The `Android` workflow builds the debug APK and runs the unit tests on every pus
 | Workflow | Purpose | What it does |
 |----------|---------|--------------|
 | [ Android ](https://github.com/hmlendea/auto-call-responder/blob/master/.github/workflows/android.yml) | Build and test | Checks out the repository, sets up JDK 17 and Gradle, builds the debug APK with `./gradlew assembleDebug`, and runs the unit tests with `./gradlew test`. |
+| [ GitHub Release ](https://github.com/hmlendea/auto-call-responder/blob/master/.github/workflows/github-release.yml) | Publish the release APK | Runs on published releases, sets up JDK 17 and Gradle, extracts the version from the tag, builds the unsigned release APK with `./gradlew clean assembleRelease`, renames it to `AutoCallResponder_v<version>_unsigned.apk`, and attaches it to the GitHub release. |
 
 ## 🏗️ Architecture
 

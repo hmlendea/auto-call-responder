@@ -12,6 +12,7 @@
 | `app/` | The single application module. |
 | `README.md`, `ARCHITECTURE.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `PRIVACY.md`, `LICENSE` | Root documents. |
 | `.github/workflows/android.yml` | Build-and-test workflow. |
+| `.github/workflows/github-release.yml` | Release workflow that builds the unsigned release APK and attaches it to a published GitHub release. |
 | `.github/FUNDING.yml` | Funding metadata used by the README badge. |
 | `docs/` | This knowledge base. |
 
