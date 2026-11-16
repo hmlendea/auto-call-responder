@@ -37,7 +37,7 @@ Stops and releases the player, then calls `audioController.restoreAfterPlayback(
 
 ### `notifyCallHandled`
 
-Guarded by `isHandled`; calls `EmailNotifier.sendCallNotification` with the session's caller number, ring time, answered time, and `System.currentTimeMillis()`.
+Guarded by `isHandled`; calls `EmailNotifier.sendCallNotification` with the service context, the session's caller number, ring time, answered time, and `System.currentTimeMillis()`.
 
 ## `CallHandlingService`
 

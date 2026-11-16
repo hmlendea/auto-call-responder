@@ -33,6 +33,7 @@ These statements must remain true across every change. Each is paired with where
 | A call that ended during the pre-answer delay still notifies on the legacy path | `PhoneStateReceiver.stopCallHandling` forwards the number; `CallHandlingService.endSession` reports it | The owner receives no notification. |
 | Notification is suppressed when the recipient, user, or password is blank | `EmailNotifier.send` | An INVALID SMTP session is attempted with incomplete credentials. |
 | Notification failure never propagates to the caller flow | Exceptions are caught inside the coroutine | A network failure could crash or delay handling. |
+| The contact lookup never blocks or fails the notification | `ContactResolver.resolve` returns `null` on any problem and runs inside the notification IO coroutine | A missing contact would suppress the e-mail or delay the call. |
 
 ## Storage invariants
 

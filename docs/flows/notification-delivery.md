@@ -9,16 +9,19 @@ sequenceDiagram
     autonumber
     participant Handler as Call handler
     participant Notifier as EmailNotifier
+    participant Contacts as ContactResolver
     participant IO as Dispatchers.IO coroutine
     participant Sender as EmailSender
     participant SMTP as SMTP server
 
-    Handler->>Notifier: sendCallNotification(number, ring, answer, end)
-    Notifier->>Notifier: buildSubject and buildBody from the captured settings
+    Handler->>Notifier: sendCallNotification(context, number, ring, answer, end)
     alt recipient, user, or password blank
         Notifier->>Notifier: log "Email settings are incomplete" and stop
     else configuration complete
         Notifier->>IO: launch (fire and forget)
+        IO->>Contacts: resolve(number) when READ_CONTACTS is granted
+        Contacts-->>IO: contact name and number type, or null
+        IO->>Notifier: buildSubject and buildBody from the captured settings
         IO->>Sender: send(sender, recipient, subject, body)
         Sender->>SMTP: connect (implicit TLS when port 465)
         Sender->>SMTP: EHLO
@@ -38,8 +41,8 @@ sequenceDiagram
 
 | Part | Source |
 |------|--------|
-| Subject | "Handled a call from `<number>`" or "Handled an unknown call". |
-| Body | Call summary, playback description, effective settings, device information, and a footer. |
+| Subject | "Handled a call from `<contact name>` (`<number>`)" when the number is in the contacts list, "Handled a call from `<number>`" otherwise, or "Handled an unknown call". |
+| Body | Call summary, contact name and number type, playback description, effective settings, device information, and a footer. |
 | Timestamps | Formatted `yyyy-MM-dd HH:mm:ss` in the default locale. |
 | Durations | Answer delay, talk time, and total time computed from the three timestamps. |
 

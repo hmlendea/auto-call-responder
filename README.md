@@ -43,7 +43,7 @@ An Android application that answers incoming calls automatically after a configu
 
 - Answers incoming calls automatically after a configurable delay.
 - Plays a selected audio file from the device during the handled call.
-- Sends an e-mail notification with the caller number, timestamps, and the effective settings.
+- Sends an e-mail notification with the caller number, contact name and number type when the caller is stored in the contacts list, timestamps, and the effective settings.
 - Handles calls from any SIM card on the device, without a per-SIM configuration.
 - Filters calls by Romanian numbers so that only fixed-line and mobile numbers in national, `+40`, or `0040` form are handled.
 - Stops the audio and skips every remaining delay as soon as the call ends, while still sending the notification.
@@ -140,6 +140,7 @@ The subsequent settings are recognised:
 | `INTERNET` | Yes | Reaches the SMTP server for notifications. |
 | `RECEIVE_BOOT_COMPLETED` | Yes | Restores the responder state after a reboot. |
 | `POST_NOTIFICATIONS` | No | Shows the foreground service notification on Android 13 and later. |
+| `READ_CONTACTS` | No | Resolves the caller's contact name and phone number type for the notification e-mail. |
 | `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` | No | Allows the user to exempt the application from battery optimisation. |
 
 ## 🛡️ Privacy and Data
@@ -151,6 +152,7 @@ For the detailed description of how the application handles privacy and personal
 | Data | Purpose | Storage | Retention | Optional |
 |------|---------|---------|-----------|----------|
 | Caller number and call timestamps | Composing the call notification e-mail. | Memory only, during the handled call. | Until the call ends. | Yes |
+| Contact name and number type | Identifying the caller in the notification e-mail. | Memory only, read from the contacts list during the notification. | Until the notification is composed. | Yes |
 | Recipient e-mail address | Sending the call notification. | Private shared preferences of the application. | Until the settings are changed. | Yes |
 | SMTP host, port, user name, and password | Authenticating against the SMTP server. | Private shared preferences of the application. | Until the settings are changed. | Yes |
 | Answering delay, filters, and audio selection | Driving the answering behaviour. | Private shared preferences of the application. | Until the settings are changed. | No |

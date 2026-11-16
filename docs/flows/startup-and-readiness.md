@@ -34,7 +34,7 @@ flowchart TD
     Perms -- yes --> Show
     Perms -- no --> Hidden["Keep the button hidden"]
     Show --> Request["User taps Request Permissions"]
-    Request --> RuntimePerms["Request READ_PHONE_STATE, ANSWER_PHONE_CALLS, POST_NOTIFICATIONS (13+), RECORD_AUDIO"]
+    Request --> RuntimePerms["Request READ_PHONE_STATE, ANSWER_PHONE_CALLS, POST_NOTIFICATIONS (13+), RECORD_AUDIO, READ_CONTACTS"]
     RuntimePerms --> RoleChoice{"Dialer role held?"}
     RoleChoice -- no --> DialerReq["Request ROLE_DIALER, or open default-apps settings"]
     RoleChoice -- yes --> ScreenHeld{"Call-screening role held?"}
@@ -73,6 +73,7 @@ The receiver starts no service. Telecom binds the screening and in-call services
 | `ROLE_DIALER` | AutoCallInCallService binding, supported mute and route | `MainActivity`, `BootReceiver`, `PhoneStateReceiver` |
 | `ROLE_CALL_SCREENING` | CallScreeningService binding | `MainActivity`, `BootReceiver` |
 | `READ_PHONE_STATE` | Legacy call observation | `MainActivity` |
+| `READ_CONTACTS` | Caller name and number type in the notification e-mail | `MainActivity`, `ContactResolver` |
 | `ANSWER_PHONE_CALLS` | Answering and ending calls | `MainActivity`, `CallHandlingService` |
 | `RECORD_AUDIO` | Audio path during the call | `MainActivity` |
 | `POST_NOTIFICATIONS` (Android 13+) | Foreground notification visibility | `MainActivity` |

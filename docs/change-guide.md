@@ -46,7 +46,8 @@ The Gson field names are the persistence contract. A rename breaks existing inst
 
 | Files | Action |
 |-------|--------|
-| `EmailNotifier.kt` | `buildSubject`, `buildBody`, `resolveAudioDescription`. |
+| `EmailNotifier.kt` | `buildSubject`, `buildBody`, `resolveAudioDescription`; pass the contact through when adding contact-derived fields. |
+| `ContactResolver.kt` | `resolve`, `queryPhoneLookup`, `resolveTypeLabel` when the contact lookup itself changes. |
 | `docs/behaviour/call-notification-emails.md`, `docs/data-model.md` | Update the payload description. |
 
 Preserve the post-disconnect dispatch and the exactly-once guard. Do not add the SMTP password or any secret.

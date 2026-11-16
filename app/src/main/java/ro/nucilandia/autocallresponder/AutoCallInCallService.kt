@@ -216,6 +216,7 @@ class AutoCallInCallService : InCallService() {
 
         // Sent only once the call has been disconnected so the SMTP transaction never delays the ending.
         EmailNotifier.sendCallNotification(
+            context = this,
             callerNumber = session.callerNumber,
             ringTimeMillis = session.ringTimeMillis,
             answerTimeMillis = session.answeredAtMillis,

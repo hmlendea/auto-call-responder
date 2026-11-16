@@ -80,6 +80,7 @@ A single file named `selected_call_audio.<extension>` inside `filesDir/call_audi
 The notification is not a persisted object; it is a formatted string built by `EmailNotifier.buildBody` from:
 
 - the caller number (or `Unknown / private number`);
+- the caller contact name and number type resolved from the contacts list (or `Not in contacts` and `Unknown`);
 - `ringTimeMillis`, `answerTimeMillis`, `endTimeMillis` and their formatted timestamps;
 - derived durations: answer delay, call duration after answer, total time;
 - the effective settings at the time of the call;

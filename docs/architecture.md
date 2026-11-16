@@ -20,6 +20,7 @@ flowchart LR
     Handling --> Mailer
     Audio --> Root["RootShell"]
     Mailer --> SMTP["SMTP server"]
+    Mailer --> Contacts["Contacts provider"]
     Root --> Mixer["su and audio mixer"]
     UI["MainActivity / SettingsActivity"] --> Store["SettingsManager"]
     Store --> Prefs["SharedPreferences"]
@@ -39,6 +40,7 @@ There is no server, worker pool, database, external queue, or remote API. The on
 | Root execution | `RootShell` | Only `CallAudioController` issues mixer commands; settings and boot only call detection. |
 | SMTP transport | `EmailSender` | Credentials arrive as constructor arguments; the transport never reads settings. |
 | Notification policy | `EmailNotifier` | Composes the message and suppresses it when recipient or credentials are incomplete. |
+| Caller identification | `ContactResolver` | The only component that queries the contacts provider; it never writes to it. |
 
 ## Two-adapter model
 

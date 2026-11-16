@@ -39,6 +39,7 @@ app/
     │   │   ├── CallHandlingService.kt
     │   │   ├── CallAudioController.kt
     │   │   ├── RootShell.kt
+    │   │   ├── ContactResolver.kt
     │   │   ├── EmailNotifier.kt
     │   │   └── EmailSender.kt
     │   └── res/
@@ -67,7 +68,7 @@ app/
 | Presentation | `MainActivity.kt`, `SettingsActivity.kt`, `AudioFilePicker.kt` | User interaction, permission and role requests, audio import. |
 | Call observation | `CallScreeningService.kt`, `AutoCallInCallService.kt`, `PhoneStateReceiver.kt`, `BootReceiver.kt` | Detect and classify calls; restore readiness. |
 | Call orchestration | `CallHandlingService.kt`, `CallAudioController.kt` | Drive the sequence and control audio for the legacy path and audio, respectively. |
-| Platform and support | `SettingsManager.kt`, `RomanianPhoneNumbers.kt`, `RootShell.kt`, `EmailNotifier.kt`, `EmailSender.kt` | Persistence, matching, privileged execution, notification. |
+| Platform and support | `SettingsManager.kt`, `RomanianPhoneNumbers.kt`, `RootShell.kt`, `EmailNotifier.kt`, `EmailSender.kt`, `ContactResolver.kt` | Persistence, matching, privileged execution, notification, contact lookup. |
 
 ## Naming conventions in the source
 

@@ -273,6 +273,7 @@ class CallHandlingService : Service() {
 
         // Sent only after the call is disconnected so SMTP never delays the ending
         EmailNotifier.sendCallNotification(
+            context = this,
             callerNumber = session.callerNumber,
             ringTimeMillis = session.ringTimeMillis,
             answerTimeMillis = session.answerTimeMillis,

@@ -1,5 +1,6 @@
 package ro.nucilandia.autocallresponder
 
+import android.content.Context
 import android.os.Build
 import android.util.Log
 import kotlinx.coroutines.CoroutineScope
@@ -15,25 +16,37 @@ object EmailNotifier {
 
     private const val TAG = "EmailNotifier"
 
-    /** Sends a notification for a handled call. Call this only after the call has been disconnected. */
+    /**
+     * Sends a notification for a handled call. Call this only after the call has been disconnected.
+     *
+     * The contact lookup runs inside the existing IO coroutine, so the caller never blocks on the
+     * contacts provider.
+     */
     fun sendCallNotification(
+        context: Context,
         callerNumber: String,
         ringTimeMillis: Long,
         answerTimeMillis: Long,
         endTimeMillis: Long
     ) {
         send(
+            context = context,
             callerNumber = callerNumber,
-            subject = buildSubject(callerNumber),
-            body = buildBody(callerNumber, ringTimeMillis, answerTimeMillis, endTimeMillis)
+            ringTimeMillis = ringTimeMillis,
+            answerTimeMillis = answerTimeMillis,
+            endTimeMillis = endTimeMillis
         )
     }
 
-    private fun buildSubject(callerNumber: String): String =
-        if (callerNumber.isBlank()) "Handled an unknown call" else "Handled a call from $callerNumber"
+    private fun buildSubject(callerNumber: String, contact: CallerContact?): String = when {
+        callerNumber.isBlank() -> "Handled an unknown call"
+        contact == null -> "Handled a call from $callerNumber"
+        else -> "Handled a call from ${contact.displayName} ($callerNumber)"
+    }
 
     private fun buildBody(
         callerNumber: String,
+        contact: CallerContact?,
         ringTimeMillis: Long,
         answerTimeMillis: Long,
         endTimeMillis: Long
@@ -53,6 +66,8 @@ object EmailNotifier {
             appendLine("Call summary")
             appendLine("------------")
             appendLine("Caller number: $displayedNumber")
+            appendLine("Contact name: ${contact?.displayName ?: "Not in contacts"}")
+            appendLine("Number type: ${contact?.numberType ?: "Unknown"}")
             appendLine("First ring: ${formatTimestamp(ringTimeMillis)}")
             if (wasAnswered) {
                 appendLine("Answered at: ${formatTimestamp(answerTimeMillis)}")
@@ -100,15 +115,27 @@ object EmailNotifier {
         return path ?: "No audio file configured"
     }
 
-    private fun send(callerNumber: String, subject: String, body: String) {
+    private fun send(
+        context: Context,
+        callerNumber: String,
+        ringTimeMillis: Long,
+        answerTimeMillis: Long,
+        endTimeMillis: Long
+    ) {
         val settings = SettingsManager.getSettings()
         if (settings.emailAddress.isBlank() || settings.smtpUser.isBlank() || settings.smtpPassword.isBlank()) {
             Log.w(TAG, "Email settings are incomplete")
             return
         }
 
+        val applicationContext = context.applicationContext
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
+                val contact = ContactResolver.resolve(applicationContext, callerNumber)
+                val subject = buildSubject(callerNumber, contact)
+                val body = buildBody(callerNumber, contact, ringTimeMillis, answerTimeMillis, endTimeMillis)
+
                 EmailSender(
                     settings.smtpHost,
                     settings.smtpPort,
