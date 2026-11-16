@@ -18,7 +18,7 @@ flowchart LR
 | Aspect | Value | Source |
 |--------|-------|--------|
 | Namespace / applicationId | `ro.nucilandia.autocallresponder` | `app/build.gradle.kts` |
-| versionCode / versionName | `1` / `1.0.0` | `app/build.gradle.kts` |
+| versionCode / versionName | `2` / `1.1.0` | `app/build.gradle.kts` |
 | minSdk / targetSdk / compileSdk | 26 / 36 / 36 | `app/build.gradle.kts` |
 | Java / Kotlin target | 17 | `app/build.gradle.kts` |
 | Release minification | Disabled | `app/build.gradle.kts` (`isMinifyEnabled = false`) |
