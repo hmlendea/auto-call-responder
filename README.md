@@ -1,5 +1,6 @@
 [![Donate](https://img.shields.io/badge/-%E2%99%A5%20Donate-%23ff69b4)](https://hmlendea.go.ro/funding)
 [![Build Status](https://github.com/hmlendea/auto-call-responder/actions/workflows/android.yml/badge.svg)](https://github.com/hmlendea/auto-call-responder/actions/workflows/android.yml)
+[![Security Scan](https://github.com/hmlendea/auto-call-responder/actions/workflows/security.yml/badge.svg)](https://github.com/hmlendea/auto-call-responder/actions/workflows/security.yml)
 [![License](https://img.shields.io/github/license/hmlendea/auto-call-responder)](https://github.com/hmlendea/auto-call-responder/blob/master/LICENSE)
 
 # Auto Call Responder
@@ -232,6 +233,7 @@ The `Android` workflow builds the debug APK and runs the unit tests on every pus
 | Workflow | Purpose | What it does |
 |----------|---------|--------------|
 | [ Android ](https://github.com/hmlendea/auto-call-responder/blob/master/.github/workflows/android.yml) | Build and test | Checks out the repository, sets up JDK 17 and Gradle, builds the debug APK with `./gradlew assembleDebug`, and runs the unit tests with `./gradlew test`. |
+| [ Security ](https://github.com/hmlendea/auto-call-responder/blob/master/.github/workflows/security.yml) | Dependency and code scanning | Submits the Gradle dependency graph, builds the debug APK, and runs CodeQL analysis for Java and Kotlin. |
 | [ GitHub Release ](https://github.com/hmlendea/auto-call-responder/blob/master/.github/workflows/github-release.yml) | Publish the release APK | Runs on published releases, sets up JDK 17 and Gradle, extracts the version from the tag, builds the unsigned release APK with `./gradlew clean assembleRelease`, renames it to `AutoCallResponder_v<version>_unsigned.apk`, and attaches it to the GitHub release. |
 
 ## 🏗️ Architecture
