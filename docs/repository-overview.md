@@ -34,7 +34,7 @@ The repository does not own:
 | Microphone mute for the whole call | `CallAudioController` | `muteMicrophone` / `unmuteMicrophone` |
 | Audio route selection (earpiece or speaker) | `CallAudioController` | `prepareForPlayback` |
 | Root-assisted uplink routing | `CallAudioController`, `RootShell` | `applyRootUplinkRouting` |
-| Notification e-mail after the call | `EmailNotifier`, `EmailSender` | `sendCallNotification` |
+| Notification e-mail after the call | `EmailNotifier`, `EmailSender`, `ContactResolver` | `sendCallNotification` |
 | Settings persistence | `SettingsManager` | Shared preferences |
 | Audio-file import | `AudioFilePicker` | Document picker result |
 

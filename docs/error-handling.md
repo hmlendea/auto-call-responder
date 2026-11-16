@@ -15,6 +15,7 @@ Every platform interaction that can fail is wrapped, logged, and allowed to degr
 | Settings failure | Missing preferences, malformed JSON | A missing JSON returns defaults; a malformed JSON raises during Gson parsing and is not caught. |
 | Root failure | `su` missing, prompt denied, timeout, mixer absent | `RootShell` returns `null` or `false`; the controller logs degradation and keeps local playback. |
 | SMTP failure | Incomplete settings, connect failure, unexpected status line, timeout | `EmailNotifier` logs and abandons the message; `MainActivity` shows a toast. |
+| Contact lookup failure | `READ_CONTACTS` not granted or revoked, no matching contact, provider query failure | `ContactResolver` logs (`Log.d` or `Log.w`) and returns `null`; the e-mail states "Not in contacts" and "Unknown" and is still sent. |
 | Intent resolution failure | No document picker, donation page unavailable | Logged and a toast is shown. |
 | Role request failure | `RoleManager` unavailable or exception | Logged (`Log.w`); on the dialer path a fallback opens the default-apps settings screen. |
 
@@ -32,6 +33,7 @@ Every platform interaction that can fail is wrapped, logged, and allowed to degr
 | `CallAudioController` | Every mute, route, mode, and root operation | Nothing else. |
 | `RootShell` | Every process execution and timeout | Nothing else. |
 | `EmailNotifier` | Every exception in the send coroutine | Nothing else. |
+| `ContactResolver` | `SecurityException` and any other exception from the contacts query | Nothing else. |
 | `EmailSender` | `close` swallowing `IOException` | Every other failure raises `IOException` to the caller. |
 
 ## Idempotency and exactly-once effects

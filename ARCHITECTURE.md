@@ -67,6 +67,7 @@ flowchart LR
     Caller -->|speaks on the incoming call| Telecom
     Telecom -->|call events, answer and disconnect requests| Responder
     User -->|settings, roles, permissions, root grant| Responder
+    Responder -->|caller number and contact| ContactResolver
     Responder -->|notification e-mail over SMTP| SMTP
     SMTP -->|delivers the message| Mailbox
     Responder -->|su and mixer commands when rooted| Root
@@ -208,7 +209,7 @@ The principal runtime sequence is:
 | `CallAudioController` | Owns microphone mute, call audio route selection, and root-assisted uplink routing for one call | `InCallService`, `AudioManager`, `RootShell` | Created per handled call and discarded when the call ends |
 | `RomanianPhoneNumbers` | Normalises and validates Romanian fixed-line and mobile numbers | None | Stateless object |
 | `RootShell` | Detects root and runs `su` commands with timeouts | `su` process execution | Process-wide cache of the detected root state |
-| `EmailNotifier` | Composes the subject and body of the call notification and dispatches it asynchronously | `SettingsManager`, `EmailSender`, `Build` | Stateless object |
+| `EmailNotifier` | Composes the subject and body of the call notification, resolves the caller contact, and dispatches it asynchronously | `SettingsManager`, `ContactResolver`, `EmailSender`, `Build` | Stateless object |
 | `EmailSender` | Performs a single SMTP transaction using STARTTLS or implicit TLS and `AUTH LOGIN` | `java.net.Socket`, `javax.net.ssl` | One instance per message |
 
 ## 🗂️ Architectural Areas
@@ -274,6 +275,7 @@ Paths:
 - `app/src/main/java/ro/nucilandia/autocallresponder/AutoCallResponderApplication.kt`
 - `app/src/main/java/ro/nucilandia/autocallresponder/SettingsManager.kt`
 - `app/src/main/java/ro/nucilandia/autocallresponder/EmailNotifier.kt`
+- `app/src/main/java/ro/nucilandia/autocallresponder/ContactResolver.kt`
 - `app/src/main/java/ro/nucilandia/autocallresponder/EmailSender.kt`
 - `app/src/main/java/ro/nucilandia/autocallresponder/RootShell.kt`
 - `app/src/main/res/xml/file_paths.xml`

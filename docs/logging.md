@@ -19,6 +19,7 @@ The application uses the Android platform logger, `android.util.Log`. No logging
 | `CallHandlingService` | `CallHandlingService` |
 | `CallAudioController` | `CallAudioController` |
 | `RootShell` | `RootShell` |
+| `ContactResolver` | `ContactResolver` |
 | `EmailNotifier` | `EmailNotifier` |
 
 ## Levels and semantics

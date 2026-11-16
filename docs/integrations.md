@@ -14,6 +14,7 @@
 | Audio mixer (`tinymix`, `tiny-mix`, `/vendor/bin/tinymix`) | Outbound | Rooted device whose kernel exposes an uplink loopback control | Route playback into the voice uplink. | No | `CallAudioController` |
 | `FileProvider` | Internal | All supported versions | Expose the imported audio to the media player. | Yes for playback | `AudioFilePicker`, `file_paths.xml` |
 | Android `RoleManager` | Outbound | Android 10+ | Query and request the dialer and call-screening roles. | Yes on the role path | `MainActivity`, `BootReceiver`, `PhoneStateReceiver` |
+| Android contacts provider (`ContactsContract.PhoneLookup`) | Inbound | All supported versions, with the `READ_CONTACTS` permission | Resolve the caller number to a contact name and number type for the notification e-mail. | No | `ContactResolver` |
 
 ## Android Telecom
 

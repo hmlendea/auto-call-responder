@@ -37,13 +37,14 @@ This document describes how Auto Call Responder at https://github.com/hmlendea/a
 ### Data Received from Integrations
 
 - No personal data is received from integrations or third parties. The caller number and the call state are obtained from the telephony framework of the operating system.
+- When the `READ_CONTACTS` permission is granted, the contacts list of the device is queried to find the entry matching the caller number: only the display name and the phone number type (mobile, work, custom label, or another stored type) of that entry are read, and they are kept in memory only while the notification e-mail is composed.
 
 ## 🧭 Processing and Use
 
 The application processes the data described above for these verified functions:
 - Answering incoming calls after the configured delay — answering delay and Romanian number filter settings.
 - Playing the selected audio during the handled call — selected audio file and earpiece-only setting.
-- Composing and sending the call notification e-mail — caller number, call timestamps, effective settings, recipient e-mail address, and SMTP credentials.
+- Composing and sending the call notification e-mail — caller number, caller contact name and number type, call timestamps, effective settings, recipient e-mail address, and SMTP credentials.
 
 ## 🗄️ Storage, Retention, and Deletion
 
@@ -57,7 +58,7 @@ The application contacts only the SMTP server configured by the user; no other e
 
 | Service or integration | Purpose | Data involved | Configuration or documentation |
 |-----------------------|---------|---------------|--------------------------------|
-| SMTP server | Sending the call notification e-mail after a handled call ends. | Caller number, call timestamps, effective settings, and the sender and recipient e-mail addresses. | Configured in the application settings; the host, port, user name, and password are entered by the user. |
+| SMTP server | Sending the call notification e-mail after a handled call ends. | Caller number, contact name and number type, call timestamps, effective settings, and the sender and recipient e-mail addresses. | Configured in the application settings; the host, port, user name, and password are entered by the user. |
 
 ## ⚙️ User Controls and Requests
 

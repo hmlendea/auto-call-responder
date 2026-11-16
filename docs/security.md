@@ -7,7 +7,7 @@ This document complements the root [SECURITY.md](../SECURITY.md) with an impleme
 | Boundary | Trust granted | Attacker model |
 |----------|---------------|----------------|
 | Android Telecom roles | Answer, mute, route, and disconnect calls. | Another application that obtains the dialer or screening role. |
-| Runtime permissions | Read phone state, answer calls, record audio, post notifications. | Another application holding the same permissions. |
+| Runtime permissions | Read phone state, answer calls, read contacts, record audio, post notifications. | Another application holding the same permissions. |
 | Root shell | Arbitrary commands as root. | The device root manager; a compromised `su`. |
 | SMTP credentials | Authentication against the configured mail account. | Anyone able to read the preferences file on a rooted or backed-up device. |
 | File provider | Read access to the imported audio file. | A malicious document provider the user selects. |
@@ -20,6 +20,7 @@ This document complements the root [SECURITY.md](../SECURITY.md) with an impleme
 | SMTP password | `AutoCallResponderPrefs` (plaintext XML) | Application sandbox only; included in cloud backup. |
 | Recipient and sender addresses | `AutoCallResponderPrefs` | Application sandbox only. |
 | Caller number | Logcat and the notification body; never persisted by the application | None beyond the OS log policy. |
+| Contact name and number type | Notification body only, read from the contacts list during the notification | None; the contacts row is never persisted or logged. |
 | Call timestamps | Notification body only | None beyond mail transport. |
 | Device manufacturer, model, Android version | Notification body only | None beyond mail transport. |
 | Imported audio file | `filesDir/call_audio` | Application sandbox; exposed only through a non-exported `FileProvider`. |
@@ -36,6 +37,7 @@ This document complements the root [SECURITY.md](../SECURITY.md) with an impleme
 | Caller number leaked to logs | Deliberate diagnostic trade-off | Any process that can read logcat can read the number. |
 | SMTP downgrade or interception | STARTTLS or implicit TLS; platform trust store | No certificate pinning. |
 | Malicious root command injection | Commands are fixed strings; no caller input is interpolated except the boolean mute value | A compromised `su` has full control. |
+| Contact data is read without consent or leaked | The lookup requires the user-granted `READ_CONTACTS` runtime permission; only the name and type label of the caller's own row are read, and they are held in memory for the notification | The user cannot restrict which of their contacts are usable; revoking the permission mid-call degrades gracefully to "Not in contacts" and "Unknown". |
 | Notification body leaked by a third-party mail provider | None added | The recipient and provider determine handling. |
 | Denial of service by a hung root prompt | Detection runs on a background thread with a 60-second limit; commands have a 5-second limit | A blocked thread may leak until the timeout. |
 

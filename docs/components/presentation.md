@@ -41,7 +41,8 @@
 - `READ_PHONE_STATE`;
 - `ANSWER_PHONE_CALLS`;
 - `POST_NOTIFICATIONS` (Android 13+);
-- `RECORD_AUDIO`.
+- `RECORD_AUDIO`;
+- `READ_CONTACTS`.
 
 `requestPermissions` requests the missing runtime permissions first, then:
 

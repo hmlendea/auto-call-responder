@@ -61,7 +61,7 @@ Auto Call Responder is a single-module Android application that answers eligible
 | [components/audio-control.md](./components/audio-control.md) | `CallAudioController`, microphone mute, route control, and uplink routing. |
 | [components/root-integration.md](./components/root-integration.md) | `RootShell` detection and privileged command execution. |
 | [components/settings-and-storage.md](./components/settings-and-storage.md) | `SettingsManager`, `AppSettings`, and the audio-file store. |
-| [components/notifications.md](./components/notifications.md) | `EmailNotifier`, `EmailSender`, and the SMTP client. |
+| [components/notifications.md](./components/notifications.md) | `EmailNotifier`, `ContactResolver`, `EmailSender`, and the SMTP client. |
 | [flows/startup-and-readiness.md](./flows/startup-and-readiness.md) | Process start, boot restoration, and readiness checks. |
 | [flows/dialer-call-handling.md](./flows/dialer-call-handling.md) | End-to-end handling on the dialer path. |
 | [flows/legacy-call-handling.md](./flows/legacy-call-handling.md) | End-to-end handling on the broadcast path. |

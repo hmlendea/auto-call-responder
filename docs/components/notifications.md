@@ -4,30 +4,32 @@
 
 | Class | File | Role |
 |-------|------|------|
-| `EmailNotifier` | `EmailNotifier.kt` | Compose and dispatch the call notification. |
+| `EmailNotifier` | `EmailNotifier.kt` | Resolve the caller contact, compose the call notification, and dispatch it. |
+| `ContactResolver` | `ContactResolver.kt` | Look up the caller number in the contacts list. |
 | `EmailSender` | `EmailSender.kt` | Perform one SMTP transaction. |
 
 ## `EmailNotifier`
 
 `object EmailNotifier` with tag `EmailNotifier`.
 
-### `sendCallNotification(callerNumber, ringTimeMillis, answerTimeMillis, endTimeMillis)`
+### `sendCallNotification(context, callerNumber, ringTimeMillis, answerTimeMillis, endTimeMillis)`
 
-Builds the subject and body, then calls `send`.
+Resolves the caller contact and builds the subject and body on the IO dispatcher, then calls `send`.
 
 ### Subject
 
 | Condition | Subject |
 |-----------|---------|
 | Blank caller number | `Handled an unknown call` |
-| Otherwise | `Handled a call from <number>` |
+| Number not in the contacts list | `Handled a call from <number>` |
+| Number in the contacts list | `Handled a call from <contact name> (<number>)` |
 
 ### Body sections
 
 | Section | Contents |
 |---------|----------|
 | Greeting | "Hello," and a statement that the application handled a call. |
-| Call summary | Caller number (or "Unknown / private number"), first ring, answered at (or "not answered automatically"), call ended, answer delay, call duration after answer, total time. |
+| Call summary | Caller number (or "Unknown / private number"), contact name (or "Not in contacts"), number type (or "Unknown"), first ring, answered at (or "not answered automatically"), call ended, answer delay, call duration after answer, total time. |
 | Playback | Audio file description (settings path, audio URI, or "No audio file configured"), output route, and a note that Android cannot inject audio into the uplink. |
 | Settings at the time of the call | Enabled, answering delay, internal delay, Romanian filter. |
 | Device | Manufacturer, model, Android release, and SDK level. |
@@ -35,9 +37,20 @@ Builds the subject and body, then calls `send`.
 
 `durationSeconds` returns `0` when the start is non-positive or the end precedes the start. `formatTimestamp` returns `"unknown"` for non-positive values and otherwise formats `yyyy-MM-dd HH:mm:ss` in the default locale.
 
+### Contact resolution
+
+`ContactResolver.resolve(context, rawNumber)` returns a `CallerContact(displayName, numberType)` or `null`:
+
+- the number is normalised (a `tel:` prefix and separators are removed) before the lookup;
+- `ContactsContract.PhoneLookup.CONTENT_FILTER_URI` is queried with the display name, type, and label columns, and the first entry with a non-blank name is used;
+- the type label is localised through `ContactsContract.CommonDataKinds.Phone.getTypeLabel`, so a custom label is used verbatim;
+- `null` is returned when the number is blank, `READ_CONTACTS` is not granted, the permission is revoked while the call was in progress, the number is not stored, or the query throws; each case is logged.
+
+The lookup runs inside the notification IO coroutine, so resolving the contact never delays the SMTP transaction or the caller.
+
 ### Dispatch
 
-`send` refuses to continue when `emailAddress`, `smtpUser`, or `smtpPassword` is blank, logging "Email settings are incomplete". Otherwise it launches an unbound `CoroutineScope(Dispatchers.IO)` that constructs `EmailSender`, sends, and logs success or failure. The caller never observes the outcome.
+`send` refuses to continue when `emailAddress`, `smtpUser`, or `smtpPassword` is blank, logging "Email settings are incomplete". Otherwise it launches an unbound `CoroutineScope(Dispatchers.IO)` that resolves the contact, builds the subject and body, constructs `EmailSender`, sends, and logs success or failure. The caller never observes the outcome.
 
 ## `EmailSender`
 
@@ -65,6 +78,17 @@ Builds the subject and body, then calls `send`.
 | Expected statuses | `220`, `250`, `354`, `221`, `334`, `235` |
 
 `expect` skips multi-line responses (a `-` at index 3) until a final line, then requires the expected status prefix. Any mismatch or a closed connection raises `IOException`.
+
+## `ContactResolver`
+
+`object ContactResolver` with tag `ContactResolver` and the value type `CallerContact(displayName, numberType)`.
+
+| Aspect | Value |
+|--------|-------|
+| Lookup URI | `ContactsContract.PhoneLookup.CONTENT_FILTER_URI` with the normalised number appended and URI-encoded |
+| Projection | `DISPLAY_NAME`, `TYPE`, `LABEL` |
+| Type label | `Phone.getTypeLabel(resources, type, label)`, falling back to the custom label when the type is absent |
+| Best effort | Returns `null` on a missing or revoked permission, a blank number, no match, or any exception |
 
 ## Guarantees
 
