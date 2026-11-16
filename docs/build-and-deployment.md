@@ -54,6 +54,20 @@ flowchart LR
 
 Lint is not part of the workflow. Reproduce the workflow locally with `./gradlew assembleDebug test`.
 
+## Security scanning
+
+`.github/workflows/security.yml` runs on pushes and pull requests targeting `master`, and weekly.
+
+| Step | Action |
+|------|--------|
+| Checkout | `actions/checkout@v7` |
+| JDK | `actions/setup-java@v6`, distribution `temurin`, version `17` |
+| Gradle | `gradle/actions/setup-gradle@v6` |
+| Dependencies | `gradle/actions/dependency-submission@v6` submits the dependency graph |
+| CodeQL initialisation | `github/codeql-action/init@v4` for `java-kotlin` |
+| Build | `./gradlew assembleDebug --no-daemon` |
+| CodeQL analysis | `github/codeql-action/analyze@v4` uploads the SARIF results |
+
 ## Release
 
 `.github/workflows/github-release.yml` runs when a GitHub release is published.

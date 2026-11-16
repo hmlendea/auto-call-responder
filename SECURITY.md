@@ -59,6 +59,14 @@ This project follows coordinated disclosure:
 3. Public disclosure is published after a fix, mitigation, or agreed risk decision is available.
 4. Credit is attributed in accordance with reporter preference and project policy.
 
+## 🔍 Automated Security Scanning
+
+This repository runs automated security scans on pushes and pull requests targeting `master`, and weekly. The scan includes:
+- **Gradle dependencies** for vulnerable dependency reporting.
+- **Java and Kotlin source code** through CodeQL analysis.
+
+Results are published to the [Security](https://github.com/hmlendea/auto-call-responder/security) tab and the [Actions](https://github.com/hmlendea/auto-call-responder/actions/workflows/security.yml) workflow page.
+
 ## 🧾 Safe Harbour
 
 If your investigation is conducted in good faith, confined to authorised scope, and disclosed responsibly, the maintainers will not pursue action for policy-compliant activity.

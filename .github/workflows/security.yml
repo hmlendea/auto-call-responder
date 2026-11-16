@@ -1,0 +1,45 @@
+name: Security
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Setup Java
+      uses: actions/setup-java@v6
+      with:
+        distribution: temurin
+        java-version: '17'
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v6
+
+    - name: Check for vulnerable dependencies
+      uses: gradle/actions/dependency-submission@v6
+      with:
+        dependency-graph-continue-on-failure: true
+
+    - name: Run CodeQL Analysis
+      uses: github/codeql-action/init@v4
+      with:
+        languages: java-kotlin
+
+    - name: Build
+      run: ./gradlew assembleDebug --no-daemon
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v4
